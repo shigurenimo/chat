@@ -1,7 +1,13 @@
+# TypeScript
+tsconfig.tsbuildinfo
+
+# deps
+node_modules/
+
 # Local
 .DS_Store
 *.local
-*.log*
+# *.log*
 
 # Dist
 node_modules
@@ -13,6 +19,6 @@ dist/
 .wrangler
 
 # IDE
-.vscode/*
+# .vscode/*
 !.vscode/extensions.json
 .idea

@@ -1,36 +1,23 @@
-import * as React from 'react'
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { Outlet, createRootRoute } from "@tanstack/react-router"
+import { Suspense } from "react"
+import { CredentialPage } from "~/components/pages/credential-page"
+import { LoadingPage } from "~/components/pages/loading-page"
+import { useCredentialStorage } from "~/hooks/use-credential-storage"
 
 export const Route = createRootRoute({
-  component: RootComponent,
+  component: RouteComponent,
 })
 
-function RootComponent() {
+function RouteComponent() {
+  const [storage, refresh] = useCredentialStorage()
+
+  if (storage.noApiKey) {
+    return <CredentialPage storage={storage} onRefresh={refresh} />
+  }
+
   return (
-    <>
-      <div className="p-2 flex gap-2 text-lg">
-        <Link
-          to="/"
-          activeProps={{
-            className: 'font-bold',
-          }}
-          activeOptions={{ exact: true }}
-        >
-          Home
-        </Link>{' '}
-        <Link
-          to="/about"
-          activeProps={{
-            className: 'font-bold',
-          }}
-        >
-          About
-        </Link>
-      </div>
-      <hr />
+    <Suspense fallback={<LoadingPage />}>
       <Outlet />
-      <TanStackRouterDevtools position="bottom-right" />
-    </>
+    </Suspense>
   )
 }

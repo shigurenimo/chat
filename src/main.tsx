@@ -1,24 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
+import { createRoot } from "react-dom/client"
+import { Toaster } from "~/components/ui/sonner"
+import { routeTree } from "~/routeTree.gen"
 
-// Set up a Router instance
+import "~/main.css"
+
+import "@xterm/xterm/css/xterm.css"
+
 const router = createRouter({
   routeTree,
-  defaultPreload: 'intent',
+  defaultPreload: "intent",
 })
 
-// Register things for typesafety
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router
   }
 }
 
-const rootElement = document.getElementById('app')!
+const container = document.getElementById("app")
 
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
-  root.render(<RouterProvider router={router} />)
+if (container === null) {
+  throw new Error("No container found")
 }
+
+const root = createRoot(container)
+
+const queryClient = new QueryClient()
+
+root.render(
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+    <Toaster />
+  </QueryClientProvider>,
+)
