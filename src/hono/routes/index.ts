@@ -1,5 +1,6 @@
+import { createDataStreamResponse } from "ai"
 import { factory } from "~/hono/factory"
-import { createChatStream } from "~/hono/lib/create-chat-stream"
+import { writeChatStream } from "~/hono/lib/write-chat-stream"
 import { MemoryStorage } from "~/lib/memory-storage"
 
 export const POST = factory.createHandlers(async (c) => {
@@ -17,5 +18,20 @@ export const POST = factory.createHandlers(async (c) => {
     content: lastMessage.content,
   })
 
-  return createChatStream({ apiKey, messages: json.messages, onMessage() {} })
+  return createDataStreamResponse({
+    async execute(stream) {
+      await writeChatStream(stream, {
+        apiKey,
+        messages: json.messages,
+        onMessage() {},
+      })
+    },
+    onError(error) {
+      console.error(error)
+      if (error instanceof Error) {
+        return error.message
+      }
+      return "ERROR"
+    },
+  })
 })
