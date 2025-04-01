@@ -1,3 +1,8 @@
+---
+description: Instructions
+globs: 
+alwaysApply: true
+---
 # 応答
 
 - chain of draft - 問題解決に必要な最低限の短いメモを応答しなさい
@@ -57,10 +62,6 @@ flowchart TD
     %% 共通終了ポイント
     END[タスク完了]
 ```
-
-# Overview
-
-チャットシステムのサンプルコード。
 
 # Memory
 
@@ -126,49 +127,6 @@ bun run build
 - shadcn/uiを使用する
 - コンポーネントは export function ComponentName () {} の形式で記述する
 
-# テスト
-
-- 副作用のあるファイルではテストは作成しない
-- `bun:test`の`test`と`expect`のみを使用する
-- testのタイトルは日本語を使用する
-- ファイル名は「.test」
-
-以下のディレクトリではテストを作成する
-
-- `**/domain/*.entity.ts`
-- `**/domain/*.value.ts`
-- `**/lib/*.ts`
-
-# ディレクトリ構成
-
-- `components/`
-- `components/chat/` - チャットメッセージ関連コンポーネント
-- `components/pages/` - ページレベルのコンポーネント
-- `components/ui/` - shadcn/uiのコンポーネント
-- `components/workspace/` - ワークスペース関連コンポーネント
-- `hooks/` - ReactのHooks
-- `lib/` - 小さなユーティリティ関数
-- `routes/__root.tsx` - ルートレイアウト
-- `routes/` - ルーティング
-- `routes/index.tsx` - ホームページ
-- `routes/settings.tsx` - 設定ページ
-- `system/` - バックエンド
-- `system/lib/` - バックエンドライブラリ
-- `system/middlewares/` - ミドルウェア
-- `system/routes/` - APIエンドポイント
-- `types/` - 複数のディレクトリから呼び出される型定義
-
-# ライブラリ
-
-- `hono` - Hono
-
-# コマンド
-
-- `bun test` - テストを実行する
-- `bun run format` - コードを整形する
-
-# 実装のパターン
-
 # コミットメッセージ
 
 以下の形式で書いてください。
@@ -200,7 +158,36 @@ update: 日本語
 - `**/domain/*.value.ts`
 - `**/lib/*.ts`
 
-# ファイル読み込み
+# Overview
 
-コードを生成する場合は以下のルールに従います。
-対象が、以下のうちの「description」または「globs」のどちらかに一致する場合はそのファイルの指示を読んで従います。
+チャットシステムのサンプルコード。
+
+# ディレクトリ構成
+
+- `components/`
+- `components/chat/` - チャットメッセージ関連コンポーネント
+- `components/pages/` - ページレベルのコンポーネント
+- `components/ui/` - shadcn/uiのコンポーネント
+- `components/workspace/` - ワークスペース関連コンポーネント
+- `hooks/` - ReactのHooks
+- `lib/` - 小さなユーティリティ関数
+- `routes/__root.tsx` - ルートレイアウト
+- `routes/` - ルーティング
+- `routes/index.tsx` - ホームページ
+- `routes/settings.tsx` - 設定ページ
+- `system/` - バックエンド
+- `system/lib/` - バックエンドライブラリ
+- `system/middlewares/` - ミドルウェア
+- `system/routes/` - APIエンドポイント
+- `types/` - 複数のディレクトリから呼び出される型定義
+
+# ライブラリ
+
+- `hono` - Hono
+
+# コマンド
+
+- `bun test` - テストを実行する
+- `bun run format` - コードを整形する
+
+# 実装のパターン
